@@ -69,9 +69,15 @@
         .tag { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: 600; }
         .tag-wa { background: rgba(37,211,102,0.12); color: #25D366; }
         .tag-ig { background: rgba(221,42,123,0.12); color: #dd2a7b; }
-        .tag-new  { background: rgba(251,93,0,0.12);   color: #fb5d00; cursor: pointer; border: none; font-family: inherit; }
-        .tag-seen { background: rgba(99,179,237,0.12);  color: #63b3ed; cursor: pointer; border: none; font-family: inherit; }
-        .tag-done { background: rgba(104,211,145,0.12); color: #68d391; cursor: pointer; border: none; font-family: inherit; }
+        .tag-new       { background: rgba(251,93,0,0.12);   color: #fb5d00; }
+        .tag-aceptado  { background: rgba(99,179,237,0.12);  color: #63b3ed; }
+        .tag-terminado { background: rgba(104,211,145,0.12); color: #68d391; }
+        .btn-accion { display: inline-flex; align-items: center; gap: 4px; padding: 4px 11px; border-radius: 20px; font-size: 0.68rem; font-weight: 700; cursor: pointer; font-family: inherit; transition: 0.2s; }
+        .btn-accion:disabled { opacity: 0.3; cursor: default; }
+        .btn-aceptar  { background: rgba(99,179,237,0.1);  color: #63b3ed; border: 1px solid rgba(99,179,237,0.35); }
+        .btn-aceptar:not(:disabled):hover  { background: rgba(99,179,237,0.25); }
+        .btn-terminar { background: rgba(104,211,145,0.1); color: #68d391; border: 1px solid rgba(104,211,145,0.35); }
+        .btn-terminar:not(:disabled):hover { background: rgba(104,211,145,0.25); }
         .order-desc { font-size: 0.78rem; color: #718096; border-top: 1px solid rgba(255,255,255,0.04); padding-top: 8px; margin-top: 8px; }
         .orders-empty { text-align: center; padding: 50px 20px; color: #2d3748; }
         .orders-empty i { font-size: 3rem; display: block; margin-bottom: 14px; }
@@ -136,8 +142,8 @@
             <div class="filter-tabs" id="filterTabs">
                 <button class="filter-btn active" data-filter="all">Todos</button>
                 <button class="filter-btn" data-filter="new">Nuevos</button>
-                <button class="filter-btn" data-filter="seen">Revisados</button>
-                <button class="filter-btn" data-filter="done">Completados</button>
+                <button class="filter-btn" data-filter="aceptado">Aceptados</button>
+                <button class="filter-btn" data-filter="terminado">Terminados</button>
             </div>
             <div id="ordersList"></div>
         </div>
@@ -246,13 +252,13 @@ function fmtDate(ts) {
 
 function renderStats(orders) {
     const n = orders.filter(o => o.status === 'new').length;
-    const s = orders.filter(o => o.status === 'seen').length;
-    const d = orders.filter(o => o.status === 'done').length;
+    const a = orders.filter(o => o.status === 'aceptado').length;
+    const t = orders.filter(o => o.status === 'terminado').length;
     document.getElementById('statsRow').innerHTML = `
         <div class="stat-card"><div class="stat-val">${orders.length}</div><div class="stat-label">Total pedidos</div></div>
         <div class="stat-card"><div class="stat-val" style="color:#fb5d00">${n}</div><div class="stat-label">Sin revisar</div></div>
-        <div class="stat-card"><div class="stat-val" style="color:#63b3ed">${s}</div><div class="stat-label">Revisados</div></div>
-        <div class="stat-card"><div class="stat-val" style="color:#68d391">${d}</div><div class="stat-label">Completados</div></div>`;
+        <div class="stat-card"><div class="stat-val" style="color:#63b3ed">${a}</div><div class="stat-label">Aceptados</div></div>
+        <div class="stat-card"><div class="stat-val" style="color:#68d391">${t}</div><div class="stat-label">Terminados</div></div>`;
 }
 
 function renderOrders(orders) {
@@ -264,12 +270,15 @@ function renderOrders(orders) {
         return;
     }
 
-    const statusLabel = { new:'Nuevo', seen:'Revisado', done:'Completado' };
-    const statusClass = { new:'tag-new', seen:'tag-seen', done:'tag-done' };
+    const statusLabel = { new:'Nuevo', aceptado:'Aceptado', terminado:'Terminado' };
+    const statusClass = { new:'tag-new', aceptado:'tag-aceptado', terminado:'tag-terminado' };
 
     el.innerHTML = list.map(o => {
         const viaClass = o.via === 'WhatsApp' ? 'tag-wa' : 'tag-ig';
         const viaIcon  = o.via === 'WhatsApp' ? 'fab fa-whatsapp' : 'fab fa-instagram';
+        const st       = o.status || 'new';
+        const isAcep   = st === 'aceptado';
+        const isTerm   = st === 'terminado';
         return `
         <div class="order-card">
             <div class="order-card-top">
@@ -282,8 +291,12 @@ function renderOrders(orders) {
             <div class="order-tags">
                 <span class="order-plan"><i class="fas fa-tag"></i> ${o.plan || '—'}</span>
                 <span class="tag ${viaClass}"><i class="${viaIcon}"></i> ${o.via}</span>
-                <button class="tag ${statusClass[o.status]}" onclick="cycleStatus('${o.docId}','${o.status}')" title="Cambiar estado">
-                    ${statusLabel[o.status]}
+                <span class="tag ${statusClass[st]}">${statusLabel[st] || st}</span>
+                <button class="btn-accion btn-aceptar" onclick="setStatus('${o.docId}','aceptado')" ${isAcep || isTerm ? 'disabled' : ''} title="Marcar como aceptado">
+                    <i class="fas fa-check"></i> Aceptar
+                </button>
+                <button class="btn-accion btn-terminar" onclick="setStatus('${o.docId}','terminado')" ${isTerm ? 'disabled' : ''} title="Marcar como terminado">
+                    <i class="fas fa-flag-checkered"></i> Terminar
                 </button>
             </div>
             ${o.descripcion ? `<div class="order-desc"><i class="fas fa-comment-alt" style="margin-right:5px;opacity:0.4;"></i>${o.descripcion}</div>` : ''}
@@ -293,9 +306,8 @@ function renderOrders(orders) {
 }
 
 // Exponer funciones al contexto global (necesario para onclick en HTML generado)
-window.cycleStatus = async (docId, currentStatus) => {
-    const cycle = { new:'seen', seen:'done', done:'new' };
-    try { await updateDoc(doc(db, 'pedidos', docId), { status: cycle[currentStatus] || 'new' }); }
+window.setStatus = async (docId, status) => {
+    try { await updateDoc(doc(db, 'pedidos', docId), { status }); }
     catch(e) { console.error(e); }
 };
 
