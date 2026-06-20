@@ -9,417 +9,116 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #13151a; color: #f4f4f9; min-height: 100vh; line-height: 1.4; }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #13151a;
-            color: #f4f4f9;
-            min-height: 100vh;
-            line-height: 1.4;
-        }
-
-        /* ===== LOGIN ===== */
+        /* LOGIN */
         #loginScreen {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+            min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px;
             background: radial-gradient(ellipse at 50% 40%, rgba(251,93,0,0.08) 0%, transparent 70%);
         }
-        .login-card {
-            background: #1e2128;
-            border: 1px solid rgba(255,255,255,0.07);
-            border-radius: 32px;
-            padding: 40px 32px;
-            width: 100%;
-            max-width: 380px;
-            text-align: center;
-            box-shadow: 0 24px 60px rgba(0,0,0,0.5);
-        }
-        .login-logo {
-            font-size: 2.4rem;
-            margin-bottom: 6px;
-        }
-        .login-brand {
-            font-size: 1.05rem;
-            font-weight: 700;
-            color: #fb5d00;
-            letter-spacing: -0.3px;
-            margin-bottom: 4px;
-        }
-        .login-subtitle {
-            font-size: 0.78rem;
-            color: #4a5568;
-            margin-bottom: 32px;
-        }
-        .login-field {
-            position: relative;
-            margin-bottom: 14px;
-        }
-        .login-field i {
-            position: absolute;
-            left: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #4a5568;
-            font-size: 0.9rem;
-        }
-        .login-field input {
-            width: 100%;
-            padding: 14px 14px 14px 40px;
-            border-radius: 16px;
-            border: 1px solid #2d3748;
-            background: #13151a;
-            color: #fff;
-            font-family: inherit;
-            font-size: 0.95rem;
-            transition: border-color 0.2s;
-            outline: none;
-        }
+        .login-card { background: #1e2128; border: 1px solid rgba(255,255,255,0.07); border-radius: 32px; padding: 40px 32px; width: 100%; max-width: 380px; text-align: center; box-shadow: 0 24px 60px rgba(0,0,0,0.5); }
+        .login-logo { font-size: 2.4rem; margin-bottom: 6px; }
+        .login-brand { font-size: 1.05rem; font-weight: 700; color: #fb5d00; margin-bottom: 4px; }
+        .login-subtitle { font-size: 0.78rem; color: #4a5568; margin-bottom: 32px; }
+        .login-field { position: relative; margin-bottom: 14px; }
+        .login-field i { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #4a5568; font-size: 0.9rem; }
+        .login-field input { width: 100%; padding: 14px 14px 14px 40px; border-radius: 16px; border: 1px solid #2d3748; background: #13151a; color: #fff; font-family: inherit; font-size: 0.95rem; outline: none; transition: border-color 0.2s; }
         .login-field input:focus { border-color: #fb5d00; }
-        .login-error {
-            color: #fc8181;
-            font-size: 0.78rem;
-            margin: -6px 0 10px;
-            min-height: 18px;
-        }
-        .btn-login {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, #fb5d00, #ff8c00);
-            border: none;
-            border-radius: 16px;
-            color: white;
-            font-weight: 700;
-            font-size: 1rem;
-            font-family: inherit;
-            cursor: pointer;
-            box-shadow: 0 8px 20px rgba(251,93,0,0.3);
-            transition: opacity 0.2s;
-        }
+        .login-error { color: #fc8181; font-size: 0.78rem; margin: -4px 0 10px; min-height: 18px; }
+        .btn-login { width: 100%; padding: 15px; background: linear-gradient(135deg, #fb5d00, #ff8c00); border: none; border-radius: 16px; color: white; font-weight: 700; font-size: 1rem; font-family: inherit; cursor: pointer; box-shadow: 0 8px 20px rgba(251,93,0,0.3); transition: opacity 0.2s; }
         .btn-login:hover { opacity: 0.88; }
-        .login-footer-note {
-            margin-top: 24px;
-            font-size: 0.7rem;
-            color: #2d3748;
-        }
+        .login-footer-note { margin-top: 24px; font-size: 0.7rem; color: #2d3748; }
 
-        /* ===== DASHBOARD ===== */
+        /* DASHBOARD */
         #dashboard { display: none; }
-
-        .topbar {
-            background: #1e2128;
-            border-bottom: 1px solid rgba(255,255,255,0.06);
-            padding: 0 24px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        .topbar-brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 700;
-            font-size: 1rem;
-            color: #fff;
-        }
+        .topbar { background: #1e2128; border-bottom: 1px solid rgba(255,255,255,0.06); padding: 0 24px; height: 60px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+        .topbar-brand { display: flex; align-items: center; gap: 6px; font-weight: 700; font-size: 1rem; color: #fff; }
         .topbar-brand span { color: #fb5d00; }
-        .topbar-actions { display: flex; align-items: center; gap: 12px; }
-        .topbar-link {
-            font-size: 0.78rem;
-            color: #718096;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            padding: 6px 12px;
-            border-radius: 20px;
-            transition: 0.2s;
-        }
+        .topbar-actions { display: flex; align-items: center; gap: 10px; }
+        .topbar-link { font-size: 0.78rem; color: #718096; text-decoration: none; display: flex; align-items: center; gap: 5px; padding: 6px 12px; border-radius: 20px; transition: 0.2s; }
         .topbar-link:hover { background: rgba(255,255,255,0.06); color: #fff; }
-        .btn-logout {
-            background: transparent;
-            border: 1px solid rgba(255,255,255,0.1);
-            color: #a0aec0;
-            padding: 7px 16px;
-            border-radius: 20px;
-            font-size: 0.78rem;
-            font-weight: 600;
-            cursor: pointer;
-            font-family: inherit;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: 0.2s;
-        }
+        .btn-logout { background: transparent; border: 1px solid rgba(255,255,255,0.1); color: #a0aec0; padding: 7px 16px; border-radius: 20px; font-size: 0.78rem; font-weight: 600; cursor: pointer; font-family: inherit; display: flex; align-items: center; gap: 6px; transition: 0.2s; }
         .btn-logout:hover { background: rgba(255,255,255,0.06); color: #fff; }
 
-        .main-content {
-            max-width: 960px;
-            margin: 0 auto;
-            padding: 32px 20px 60px;
-        }
+        .main-content { max-width: 960px; margin: 0 auto; padding: 32px 20px 60px; }
 
-        /* Stats */
-        .stats-row {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-bottom: 32px;
-        }
+        .stats-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 32px; }
         @media (min-width: 480px) { .stats-row { grid-template-columns: repeat(4, 1fr); } }
-        .stat-card {
-            background: #1e2128;
-            border-radius: 20px;
-            padding: 18px 16px;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
+        .stat-card { background: #1e2128; border-radius: 20px; padding: 18px 16px; border: 1px solid rgba(255,255,255,0.05); }
         .stat-val { font-size: 2rem; font-weight: 800; color: #fb5d00; }
         .stat-label { font-size: 0.72rem; color: #4a5568; margin-top: 2px; }
 
-        /* Sections */
         .section { margin-bottom: 40px; }
-        .section-head {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 16px;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-        .section-head h2 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+        .section-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 8px; }
+        .section-head h2 { font-size: 1.1rem; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px; }
         .section-head h2 i { color: #fb5d00; font-size: 0.95rem; }
 
-        /* Buttons */
-        .btn-danger-sm {
-            background: rgba(197,48,48,0.12);
-            border: 1px solid rgba(197,48,48,0.35);
-            color: #fc8181;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            cursor: pointer;
-            font-family: inherit;
-            transition: 0.2s;
-        }
+        .btn-danger-sm { background: rgba(197,48,48,0.12); border: 1px solid rgba(197,48,48,0.35); color: #fc8181; padding: 6px 14px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; cursor: pointer; font-family: inherit; transition: 0.2s; }
         .btn-danger-sm:hover { background: rgba(197,48,48,0.25); }
-        .btn-save {
-            background: linear-gradient(135deg, #fb5d00, #ff8c00);
-            border: none;
-            padding: 9px 20px;
-            border-radius: 20px;
-            font-size: 0.82rem;
-            font-weight: 700;
-            color: white;
-            cursor: pointer;
-            font-family: inherit;
-            transition: opacity 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
+        .btn-save { background: linear-gradient(135deg, #fb5d00, #ff8c00); border: none; padding: 9px 20px; border-radius: 20px; font-size: 0.82rem; font-weight: 700; color: white; cursor: pointer; font-family: inherit; transition: opacity 0.2s; display: inline-flex; align-items: center; gap: 6px; }
         .btn-save:hover { opacity: 0.85; }
-        .btn-icon-sm {
-            background: transparent;
-            border: none;
-            color: #4a5568;
-            cursor: pointer;
-            padding: 5px 7px;
-            border-radius: 8px;
-            font-size: 0.82rem;
-            transition: 0.2s;
-        }
+        .btn-icon-sm { background: transparent; border: none; color: #4a5568; cursor: pointer; padding: 5px 7px; border-radius: 8px; font-size: 0.82rem; transition: 0.2s; }
         .btn-icon-sm:hover { color: #fc8181; background: rgba(252,129,129,0.08); }
 
-        /* Order cards */
-        .order-card {
-            background: #1e2128;
-            border-radius: 18px;
-            padding: 16px 18px;
-            margin-bottom: 10px;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-        .order-card-top {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-bottom: 6px;
-        }
+        .order-card { background: #1e2128; border-radius: 18px; padding: 16px 18px; margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.05); }
+        .order-card-top { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px; margin-bottom: 6px; }
         .order-name { font-weight: 700; font-size: 1rem; color: #fff; }
         .order-date { font-size: 0.7rem; color: #4a5568; }
-        .order-tags {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            flex-wrap: wrap;
-        }
+        .order-tags { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
         .order-plan { font-size: 0.8rem; font-weight: 600; color: #fb5d00; }
-        .tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            padding: 3px 10px;
-            border-radius: 20px;
-            font-size: 0.7rem;
-            font-weight: 600;
-        }
+        .tag { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: 600; }
         .tag-wa { background: rgba(37,211,102,0.12); color: #25D366; }
         .tag-ig { background: rgba(221,42,123,0.12); color: #dd2a7b; }
-        .tag-new { background: rgba(251,93,0,0.12); color: #fb5d00; cursor: pointer; border: none; font-family: inherit; }
-        .tag-seen { background: rgba(99,179,237,0.12); color: #63b3ed; cursor: pointer; border: none; font-family: inherit; }
+        .tag-new  { background: rgba(251,93,0,0.12);   color: #fb5d00; cursor: pointer; border: none; font-family: inherit; }
+        .tag-seen { background: rgba(99,179,237,0.12);  color: #63b3ed; cursor: pointer; border: none; font-family: inherit; }
         .tag-done { background: rgba(104,211,145,0.12); color: #68d391; cursor: pointer; border: none; font-family: inherit; }
-        .order-desc {
-            font-size: 0.78rem;
-            color: #718096;
-            border-top: 1px solid rgba(255,255,255,0.04);
-            padding-top: 8px;
-            margin-top: 8px;
-        }
-        .order-actions { display: flex; align-items: center; gap: 4px; }
-        .orders-empty {
-            text-align: center;
-            padding: 50px 20px;
-            color: #2d3748;
-        }
+        .order-desc { font-size: 0.78rem; color: #718096; border-top: 1px solid rgba(255,255,255,0.04); padding-top: 8px; margin-top: 8px; }
+        .orders-empty { text-align: center; padding: 50px 20px; color: #2d3748; }
         .orders-empty i { font-size: 3rem; display: block; margin-bottom: 14px; }
         .orders-empty p { font-size: 0.85rem; }
 
-        /* Plan editor */
-        .plan-editor-grid {
-            display: grid;
-            gap: 14px;
-        }
+        .plan-editor-grid { display: grid; gap: 14px; }
         @media (min-width: 600px) { .plan-editor-grid { grid-template-columns: repeat(2, 1fr); } }
-        .plan-editor-card {
-            background: #1e2128;
-            border-radius: 18px;
-            padding: 18px;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-        .plan-editor-card-head {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 14px;
-        }
+        .plan-editor-card { background: #1e2128; border-radius: 18px; padding: 18px; border: 1px solid rgba(255,255,255,0.05); }
+        .plan-editor-card-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
         .plan-editor-name { font-weight: 700; font-size: 0.95rem; color: #fff; }
-        .plan-badge {
-            padding: 3px 10px;
-            border-radius: 20px;
-            font-size: 0.65rem;
-            font-weight: 700;
-        }
-        .badge-basic { background: #2e7d32; }
-        .badge-standard { background: #f9a825; color: #1a1d23; }
-        .badge-pro { background: #1565c0; }
-        .badge-premium { background: #c62828; }
-        .field-label {
-            font-size: 0.68rem;
-            font-weight: 600;
-            color: #4a5568;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 4px;
-            display: block;
-        }
-        .field-input {
-            width: 100%;
-            padding: 10px 14px;
-            border-radius: 12px;
-            border: 1px solid #2d3748;
-            background: #13151a;
-            color: #fff;
-            font-family: inherit;
-            font-size: 0.88rem;
-            outline: none;
-            transition: border-color 0.2s;
-            margin-bottom: 10px;
-        }
+        .plan-badge { padding: 3px 10px; border-radius: 20px; font-size: 0.65rem; font-weight: 700; }
+        .badge-basic { background: #2e7d32; } .badge-standard { background: #f9a825; color: #1a1d23; } .badge-pro { background: #1565c0; } .badge-premium { background: #c62828; }
+        .field-label { font-size: 0.68rem; font-weight: 600; color: #4a5568; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; display: block; }
+        .field-input { width: 100%; padding: 10px 14px; border-radius: 12px; border: 1px solid #2d3748; background: #13151a; color: #fff; font-family: inherit; font-size: 0.88rem; outline: none; transition: border-color 0.2s; margin-bottom: 10px; }
         .field-input:focus { border-color: #fb5d00; }
         textarea.field-input { resize: vertical; border-radius: 12px; min-height: 90px; }
         .plan-editor-footer { display: flex; justify-content: flex-end; margin-top: 6px; }
-        .save-toast {
-            position: fixed;
-            bottom: 24px;
-            left: 50%;
-            transform: translateX(-50%) translateY(80px);
-            background: #25D366;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 0.85rem;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-            transition: transform 0.3s ease;
-            pointer-events: none;
-            z-index: 999;
-            white-space: nowrap;
-        }
-        .save-toast.show { transform: translateX(-50%) translateY(0); }
 
-        /* Filter tabs */
-        .filter-tabs {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-bottom: 16px;
-        }
-        .filter-btn {
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            cursor: pointer;
-            border: 1px solid transparent;
-            font-family: inherit;
-            transition: 0.2s;
-            background: #1e2128;
-            color: #718096;
-        }
-        .filter-btn.active { background: #fb5d00; color: white; border-color: transparent; }
+        .filter-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+        .filter-btn { padding: 6px 14px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; cursor: pointer; border: 1px solid transparent; font-family: inherit; transition: 0.2s; background: #1e2128; color: #718096; }
+        .filter-btn.active { background: #fb5d00; color: white; }
         .filter-btn:not(.active):hover { border-color: #fb5d00; color: #fb5d00; }
+
+        .save-toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px); background: #25D366; color: white; padding: 12px 24px; border-radius: 50px; font-weight: 700; font-size: 0.85rem; box-shadow: 0 8px 24px rgba(0,0,0,0.4); transition: transform 0.3s ease; pointer-events: none; z-index: 999; white-space: nowrap; }
+        .save-toast.show { transform: translateX(-50%) translateY(0); }
     </style>
 </head>
 <body>
 
-<!-- ===== LOGIN ===== -->
 <div id="loginScreen">
     <div class="login-card">
         <div class="login-logo">🚁</div>
         <div class="login-brand">fly_vision.cl</div>
         <div class="login-subtitle">Panel de administración · Acceso privado</div>
-
         <div class="login-field">
             <i class="fas fa-lock"></i>
             <input type="password" id="loginPass" placeholder="Contraseña" autocomplete="current-password">
         </div>
         <div class="login-error" id="loginError"></div>
         <button class="btn-login" id="loginBtn"><i class="fas fa-sign-in-alt"></i> Entrar</button>
-        <div class="login-footer-note">Esta página es de acceso exclusivo para el administrador</div>
+        <div class="login-footer-note">Acceso exclusivo para el administrador</div>
     </div>
 </div>
 
-<!-- ===== DASHBOARD ===== -->
 <div id="dashboard">
     <div class="topbar">
-        <div class="topbar-brand">
-            <span>fly_vision</span>.cl &nbsp;·&nbsp; Admin
-        </div>
+        <div class="topbar-brand"><span>fly_vision</span>.cl &nbsp;·&nbsp; Admin</div>
         <div class="topbar-actions">
             <a href="/" class="topbar-link"><i class="fas fa-home"></i> Ver sitio</a>
             <button class="btn-logout" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Salir</button>
@@ -427,11 +126,8 @@
     </div>
 
     <div class="main-content">
-
-        <!-- Stats -->
         <div class="stats-row" id="statsRow"></div>
 
-        <!-- Pedidos -->
         <div class="section">
             <div class="section-head">
                 <h2><i class="fas fa-clipboard-list"></i> Pedidos recibidos</h2>
@@ -446,63 +142,52 @@
             <div id="ordersList"></div>
         </div>
 
-        <!-- Editor de planes -->
         <div class="section">
             <div class="section-head">
                 <h2><i class="fas fa-sliders-h"></i> Planes y precios</h2>
             </div>
             <div class="plan-editor-grid" id="plansEditor"></div>
         </div>
-
     </div>
 </div>
 
-<!-- Toast notificación -->
 <div class="save-toast" id="saveToast"></div>
 
-<script>
-// ===== CONSTANTES =====
-const ADMIN_PASS = 'fly2026';
-const SESSION_KEY = 'fv_admin_session';
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+import {
+    getFirestore, collection, getDocs, onSnapshot,
+    query, orderBy, doc, setDoc, updateDoc, deleteDoc
+} from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDezL0tZRXITU-93pVKUIXy3nTOsUAtyWM",
+    authDomain: "fly-vision-e13e6.firebaseapp.com",
+    projectId: "fly-vision-e13e6",
+    storageBucket: "fly-vision-e13e6.firebasestorage.app",
+    messagingSenderId: "819877097310",
+    appId: "1:819877097310:web:b228cb3c0020623cdd29cf"
+};
+
+const app = initializeApp(firebaseConfig);
+const db  = getFirestore(app);
 
 const DEFAULT_PLANS = [
-    { id:'basico',   nombre:'Plan Básico',   emoji:'🟢', badge:'badge-basic',    precio:'30.000', features:['Video corto con drone','1 ubicación','10-15 min','Redes sociales, casas pequeñas'], icons:['fa-check-circle','fa-location-dot','fa-clock','fa-chart-line'] },
-    { id:'estandar', nombre:'Plan Estándar', emoji:'🟡', badge:'badge-standard', precio:'60.000', features:['Video + tomas variadas','1 ubicación','20-30 min','Casas, parcelas, negocios'],       icons:['fa-check-circle','fa-location-dot','fa-clock','fa-chart-line'] },
-    { id:'pro',      nombre:'Plan Pro',      emoji:'🔵', badge:'badge-pro',      precio:'90.000', features:['Video + edición básica','1 ubicación','Hasta 40 min','Inmobiliarias, eventos pequeños'], icons:['fa-check-circle','fa-location-dot','fa-clock','fa-chart-line'] },
-    { id:'premium',  nombre:'Plan Premium',  emoji:'🔴', badge:'badge-premium',  precio:'120.000',features:['Video + edición + música','1-2 ubicaciones','Hasta 1 hora','Publicidad, empresas, eventos'], icons:['fa-check-circle','fa-location-dot','fa-clock','fa-chart-line'] }
+    { id:'basico',   nombre:'Plan Básico',   emoji:'🟢', badge:'badge-basic',    precio:'30.000', features:['Video corto con drone','1 ubicación','10-15 min','Redes sociales, casas pequeñas'], icons:['fa-check-circle','fa-location-dot','fa-clock','fa-chart-line'], orden:0 },
+    { id:'estandar', nombre:'Plan Estándar', emoji:'🟡', badge:'badge-standard', precio:'60.000', features:['Video + tomas variadas','1 ubicación','20-30 min','Casas, parcelas, negocios'],       icons:['fa-check-circle','fa-location-dot','fa-clock','fa-chart-line'], orden:1 },
+    { id:'pro',      nombre:'Plan Pro',      emoji:'🔵', badge:'badge-pro',      precio:'90.000', features:['Video + edición básica','1 ubicación','Hasta 40 min','Inmobiliarias, eventos pequeños'], icons:['fa-check-circle','fa-location-dot','fa-clock','fa-chart-line'], orden:2 },
+    { id:'premium',  nombre:'Plan Premium',  emoji:'🔴', badge:'badge-premium',  precio:'120.000',features:['Video + edición + música','1-2 ubicaciones','Hasta 1 hora','Publicidad, empresas, eventos'], icons:['fa-check-circle','fa-location-dot','fa-clock','fa-chart-line'], orden:3 }
 ];
 
-// ===== HELPERS =====
-function getPlans() {
-    try { const s = localStorage.getItem('fv_plans'); return s ? JSON.parse(s) : DEFAULT_PLANS; } catch(e) { return DEFAULT_PLANS; }
-}
-function savePlans(p) { localStorage.setItem('fv_plans', JSON.stringify(p)); }
-
-function getOrders() {
-    try { const s = localStorage.getItem('fv_orders'); return s ? JSON.parse(s) : []; } catch(e) { return []; }
-}
-function setOrders(o) { localStorage.setItem('fv_orders', JSON.stringify(o)); }
-
-function fmtDate(ts) {
-    const d = new Date(ts);
-    return d.toLocaleDateString('es-CL',{day:'2-digit',month:'2-digit',year:'numeric'}) + ' ' +
-           d.toLocaleTimeString('es-CL',{hour:'2-digit',minute:'2-digit'});
-}
-
-function toast(msg, color) {
-    const el = document.getElementById('saveToast');
-    el.textContent = msg;
-    el.style.background = color || '#25D366';
-    el.classList.add('show');
-    setTimeout(() => el.classList.remove('show'), 2500);
-}
-
 // ===== AUTH =====
+const ADMIN_PASS   = 'fly2026';
+const SESSION_KEY  = 'fv_admin_session';
+
 function isLoggedIn() { return sessionStorage.getItem(SESSION_KEY) === '1'; }
 
 function doLogin() {
     const pass = document.getElementById('loginPass').value;
-    const err = document.getElementById('loginError');
+    const err  = document.getElementById('loginError');
     if (pass === ADMIN_PASS) {
         sessionStorage.setItem(SESSION_KEY, '1');
         err.textContent = '';
@@ -516,7 +201,8 @@ function doLogin() {
 
 function doLogout() {
     sessionStorage.removeItem(SESSION_KEY);
-    document.getElementById('dashboard').style.display = 'none';
+    if (ordersUnsub) ordersUnsub();
+    document.getElementById('dashboard').style.display  = 'none';
     document.getElementById('loginScreen').style.display = 'flex';
     document.getElementById('loginPass').value = '';
 }
@@ -525,41 +211,56 @@ document.getElementById('loginBtn').addEventListener('click', doLogin);
 document.getElementById('loginPass').addEventListener('keydown', e => { if(e.key === 'Enter') doLogin(); });
 document.getElementById('logoutBtn').addEventListener('click', doLogout);
 
+// ===== DASHBOARD =====
+let ordersUnsub  = null;
+let currentFilter = 'all';
+let allOrders     = [];
+
 function showDashboard() {
     document.getElementById('loginScreen').style.display = 'none';
-    document.getElementById('dashboard').style.display = 'block';
-    renderAll();
+    document.getElementById('dashboard').style.display   = 'block';
+    startOrdersListener();
+    loadPlansEditor();
 }
 
-// ===== RENDER =====
-let currentFilter = 'all';
-
-function renderAll() {
-    renderStats();
-    renderOrders();
-    renderPlansEditor();
+// ===== PEDIDOS — escucha en tiempo real =====
+function startOrdersListener() {
+    if (ordersUnsub) ordersUnsub();
+    ordersUnsub = onSnapshot(
+        query(collection(db, 'pedidos'), orderBy('fecha', 'desc')),
+        snap => {
+            allOrders = snap.docs.map(d => ({ docId: d.id, ...d.data() }));
+            renderStats(allOrders);
+            renderOrders(allOrders);
+        },
+        err => console.error('Error pedidos:', err)
+    );
 }
 
-function renderStats() {
-    const orders = getOrders();
-    const newCount  = orders.filter(o => o.status === 'new').length;
-    const seenCount = orders.filter(o => o.status === 'seen').length;
-    const doneCount = orders.filter(o => o.status === 'done').length;
+function fmtDate(ts) {
+    if (!ts) return '—';
+    const d = ts.toDate ? ts.toDate() : new Date(ts);
+    return d.toLocaleDateString('es-CL',{day:'2-digit',month:'2-digit',year:'numeric'})
+         + ' ' + d.toLocaleTimeString('es-CL',{hour:'2-digit',minute:'2-digit'});
+}
+
+function renderStats(orders) {
+    const n = orders.filter(o => o.status === 'new').length;
+    const s = orders.filter(o => o.status === 'seen').length;
+    const d = orders.filter(o => o.status === 'done').length;
     document.getElementById('statsRow').innerHTML = `
         <div class="stat-card"><div class="stat-val">${orders.length}</div><div class="stat-label">Total pedidos</div></div>
-        <div class="stat-card"><div class="stat-val" style="color:#fb5d00">${newCount}</div><div class="stat-label">Sin revisar</div></div>
-        <div class="stat-card"><div class="stat-val" style="color:#63b3ed">${seenCount}</div><div class="stat-label">Revisados</div></div>
-        <div class="stat-card"><div class="stat-val" style="color:#68d391">${doneCount}</div><div class="stat-label">Completados</div></div>
-    `;
+        <div class="stat-card"><div class="stat-val" style="color:#fb5d00">${n}</div><div class="stat-label">Sin revisar</div></div>
+        <div class="stat-card"><div class="stat-val" style="color:#63b3ed">${s}</div><div class="stat-label">Revisados</div></div>
+        <div class="stat-card"><div class="stat-val" style="color:#68d391">${d}</div><div class="stat-label">Completados</div></div>`;
 }
 
-function renderOrders() {
-    const all = getOrders();
-    const list = currentFilter === 'all' ? all : all.filter(o => o.status === currentFilter);
-    const el = document.getElementById('ordersList');
+function renderOrders(orders) {
+    const list = currentFilter === 'all' ? orders : orders.filter(o => o.status === currentFilter);
+    const el   = document.getElementById('ordersList');
 
     if (list.length === 0) {
-        el.innerHTML = `<div class="orders-empty"><i class="fas fa-inbox"></i><p>${all.length === 0 ? 'Aún no hay pedidos registrados.<br>Aparecerán aquí cuando los clientes usen el formulario.' : 'No hay pedidos en esta categoría.'}</p></div>`;
+        el.innerHTML = `<div class="orders-empty"><i class="fas fa-inbox"></i><p>${orders.length === 0 ? 'Aún no hay pedidos. Aparecerán aquí cuando los clientes usen el formulario.' : 'No hay pedidos en esta categoría.'}</p></div>`;
         return;
     }
 
@@ -567,7 +268,6 @@ function renderOrders() {
     const statusClass = { new:'tag-new', seen:'tag-seen', done:'tag-done' };
 
     el.innerHTML = list.map(o => {
-        const globalIdx = all.indexOf(o);
         const viaClass = o.via === 'WhatsApp' ? 'tag-wa' : 'tag-ig';
         const viaIcon  = o.via === 'WhatsApp' ? 'fab fa-whatsapp' : 'fab fa-instagram';
         return `
@@ -577,91 +277,103 @@ function renderOrders() {
                     <span class="order-name">${o.nombre || 'Sin nombre'}</span>
                     <span class="order-date"><i class="fas fa-calendar-alt"></i> ${fmtDate(o.fecha)}</span>
                 </div>
-                <div class="order-actions">
-                    <button class="btn-icon-sm" onclick="deleteOrder(${globalIdx})" title="Eliminar"><i class="fas fa-trash-alt"></i></button>
-                </div>
+                <button class="btn-icon-sm" onclick="deleteOrder('${o.docId}')" title="Eliminar"><i class="fas fa-trash-alt"></i></button>
             </div>
             <div class="order-tags">
                 <span class="order-plan"><i class="fas fa-tag"></i> ${o.plan || '—'}</span>
                 <span class="tag ${viaClass}"><i class="${viaIcon}"></i> ${o.via}</span>
-                <button class="tag ${statusClass[o.status]}" onclick="cycleStatus(${globalIdx})" title="Clic para cambiar estado">
+                <button class="tag ${statusClass[o.status]}" onclick="cycleStatus('${o.docId}','${o.status}')" title="Cambiar estado">
                     ${statusLabel[o.status]}
                 </button>
             </div>
             ${o.descripcion ? `<div class="order-desc"><i class="fas fa-comment-alt" style="margin-right:5px;opacity:0.4;"></i>${o.descripcion}</div>` : ''}
-            ${o.detalle ? `<div style="font-size:0.7rem;color:#2d3748;margin-top:4px;">${o.detalle}</div>` : ''}
+            ${o.detalle     ? `<div style="font-size:0.7rem;color:#2d3748;margin-top:4px;">${o.detalle}</div>` : ''}
         </div>`;
     }).join('');
 }
 
-function cycleStatus(idx) {
-    const orders = getOrders();
+// Exponer funciones al contexto global (necesario para onclick en HTML generado)
+window.cycleStatus = async (docId, currentStatus) => {
     const cycle = { new:'seen', seen:'done', done:'new' };
-    orders[idx].status = cycle[orders[idx].status] || 'new';
-    setOrders(orders);
-    renderStats();
-    renderOrders();
-}
+    try { await updateDoc(doc(db, 'pedidos', docId), { status: cycle[currentStatus] || 'new' }); }
+    catch(e) { console.error(e); }
+};
 
-function deleteOrder(idx) {
+window.deleteOrder = async (docId) => {
     if (!confirm('¿Eliminar este pedido?')) return;
-    const orders = getOrders();
-    orders.splice(idx, 1);
-    setOrders(orders);
-    renderStats();
-    renderOrders();
-}
+    try { await deleteDoc(doc(db, 'pedidos', docId)); }
+    catch(e) { console.error(e); }
+};
 
-document.getElementById('clearOrdersBtn').addEventListener('click', () => {
+document.getElementById('clearOrdersBtn').addEventListener('click', async () => {
     if (!confirm('¿Eliminar TODOS los pedidos? Esta acción no se puede deshacer.')) return;
-    localStorage.removeItem('fv_orders');
-    renderStats();
-    renderOrders();
-    toast('Historial borrado', '#fb5d00');
+    try {
+        const snap = await getDocs(collection(db, 'pedidos'));
+        await Promise.all(snap.docs.map(d => deleteDoc(d.ref)));
+        toast('Historial borrado', '#fb5d00');
+    } catch(e) { console.error(e); }
 });
 
-// Filter tabs
 document.getElementById('filterTabs').addEventListener('click', e => {
     const btn = e.target.closest('.filter-btn');
     if (!btn) return;
     currentFilter = btn.dataset.filter;
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    renderOrders();
+    renderOrders(allOrders);
 });
 
-// ===== EDITOR DE PLANES =====
-function renderPlansEditor() {
-    const plans = getPlans();
+// ===== PLANES =====
+async function loadPlansEditor() {
+    try {
+        const snap = await getDocs(query(collection(db, 'planes'), orderBy('orden')));
+        let plans;
+        if (snap.empty) {
+            // Primera vez: sembrar con valores por defecto
+            await Promise.all(DEFAULT_PLANS.map(p => setDoc(doc(db, 'planes', p.id), p)));
+            plans = DEFAULT_PLANS.map(p => ({ docId: p.id, ...p }));
+        } else {
+            plans = snap.docs.map(d => ({ docId: d.id, ...d.data() })).sort((a,b) => (a.orden||0)-(b.orden||0));
+        }
+        renderPlansEditor(plans);
+    } catch(e) { console.error('Error cargando planes:', e); }
+}
+
+function renderPlansEditor(plans) {
     document.getElementById('plansEditor').innerHTML = plans.map((p, idx) => `
         <div class="plan-editor-card">
             <div class="plan-editor-card-head">
                 <span class="plan-editor-name">${p.emoji} ${p.nombre}</span>
-                <span class="plan-badge ${p.badge}">${p.badge.replace('badge-','')}</span>
+                <span class="plan-badge ${p.badge}">${(p.badge||'').replace('badge-','')}</span>
             </div>
             <label class="field-label">Precio CLP</label>
             <input class="field-input" type="text" id="precio-${idx}" value="${p.precio}" placeholder="ej: 30.000">
             <label class="field-label">Características (una por línea)</label>
-            <textarea class="field-input" id="feats-${idx}" rows="4">${p.features.join('\n')}</textarea>
+            <textarea class="field-input" id="feats-${idx}" rows="4">${(p.features||[]).join('\n')}</textarea>
             <div class="plan-editor-footer">
-                <button class="btn-save" onclick="savePlan(${idx})"><i class="fas fa-save"></i> Guardar</button>
+                <button class="btn-save" onclick="savePlan('${p.docId}','${idx}')"><i class="fas fa-save"></i> Guardar</button>
             </div>
-        </div>
-    `).join('');
+        </div>`).join('');
 }
 
-function savePlan(idx) {
-    const plans = getPlans();
-    const precio = document.getElementById(`precio-${idx}`).value.trim();
-    const feats  = document.getElementById(`feats-${idx}`).value.split('\n').map(f => f.trim()).filter(f => f);
-    if (!precio) { toast('El precio no puede estar vacío', '#fc8181'); return; }
+window.savePlan = async (planId, idx) => {
+    const precio = document.getElementById(`precio-${idx}`)?.value.trim();
+    const feats  = document.getElementById(`feats-${idx}`)?.value.split('\n').map(f=>f.trim()).filter(Boolean);
+    if (!precio)       { toast('El precio no puede estar vacío', '#fc8181'); return; }
     if (!feats.length) { toast('Agrega al menos una característica', '#fc8181'); return; }
-    plans[idx].precio   = precio;
-    plans[idx].features = feats;
-    while (plans[idx].icons.length < feats.length) plans[idx].icons.push('fa-check-circle');
-    plans[idx].icons = plans[idx].icons.slice(0, feats.length);
-    savePlans(plans);
-    toast(`✅ ${plans[idx].nombre} guardado`);
+    try {
+        await setDoc(doc(db, 'planes', planId), { precio, features: feats }, { merge: true });
+        toast('✅ Plan guardado correctamente');
+    } catch(e) { toast('Error al guardar', '#fc8181'); console.error(e); }
+};
+
+// ===== TOAST =====
+function toast(msg, color) {
+    const el = document.getElementById('saveToast');
+    el.textContent = msg;
+    el.style.background = color || '#25D366';
+    el.classList.add('show');
+    setTimeout(() => el.classList.remove('show'), 2500);
 }
 
 // ===== INIT =====
