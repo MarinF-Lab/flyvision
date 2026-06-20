@@ -57,6 +57,18 @@
             background: rgba(251,93,0,0.2);
             color: #ff8c00;
         }
+        #adminTabBtn {
+            display: none;
+            background: rgba(255,255,255,0.05);
+            color: #a0aec0;
+            font-size: 0.85rem;
+            padding: 10px 18px;
+        }
+        #adminTabBtn.active {
+            background: #2d3748;
+            color: #e2e8f0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
         .tab-content {
             display: none;
             animation: fadeIn 0.3s ease;
@@ -100,11 +112,36 @@
             max-width: 350px;
             margin: 0 auto;
         }
+        .drone-card-link {
+            display: block;
+            text-decoration: none;
+            transition: transform 0.25s;
+        }
+        .drone-card-link:hover {
+            transform: scale(1.03);
+        }
+        .drone-card-link:hover .drone-card {
+            border-color: rgba(251,93,0,0.5);
+            box-shadow: 0 0 24px rgba(251,93,0,0.2);
+        }
+        .drone-card-link .ig-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 6px 14px;
+            background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af);
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: white;
+            letter-spacing: 0.3px;
+        }
         .drone-card {
             background: #23272f;
             border-radius: 28px;
             overflow: hidden;
             border: 1px solid rgba(255,255,255,0.05);
+            transition: border-color 0.25s, box-shadow 0.25s;
         }
         .drone-img {
             width: 100%;
@@ -223,7 +260,7 @@
         }
         .modal-content h3 { font-size: 1.6rem; margin-bottom: 6px; text-align: center; }
         .modal-content .sub-modal { text-align: center; font-size: 0.8rem; margin-bottom: 20px; opacity: 0.7; }
-        
+
         input, textarea {
             width: 100%;
             margin: 10px 0;
@@ -236,7 +273,7 @@
             font-size: 0.9rem;
         }
         textarea { border-radius: 24px; resize: vertical; }
-        
+
         .planes-selector {
             display: flex;
             flex-direction: column;
@@ -293,7 +330,7 @@
             background: #fb5d00;
             box-shadow: inset 0 0 0 4px #1e2128;
         }
-        
+
         .modal-buttons {
             display: flex;
             flex-direction: column;
@@ -366,6 +403,254 @@
             color: #a0aec0;
         }
         .footer-social { display: flex; justify-content: center; gap: 20px; margin-top: 12px; }
+        .footer-secret {
+            margin-top: 14px;
+            opacity: 0.2;
+            cursor: default;
+            font-size: 0.65rem;
+            user-select: none;
+        }
+        .footer-secret:hover { opacity: 0.4; }
+
+        /* ===================== ADMIN PANEL ===================== */
+        .admin-login {
+            max-width: 380px;
+            margin: 40px auto;
+            text-align: center;
+        }
+        .admin-login h2 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+        .admin-login p {
+            color: #a0aec0;
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+        }
+        .admin-lock-icon {
+            font-size: 2.5rem;
+            color: #fb5d00;
+            margin: 16px 0;
+        }
+        .admin-error {
+            color: #fc8181;
+            font-size: 0.8rem;
+            margin-top: 8px;
+            min-height: 20px;
+        }
+        .admin-dashboard { padding-bottom: 60px; }
+        .admin-section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 30px 0 16px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .admin-section-header h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .admin-section-header h3 i { color: #fb5d00; }
+        .btn-danger-sm {
+            background: rgba(197,48,48,0.15);
+            border: 1px solid rgba(197,48,48,0.4);
+            color: #fc8181;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            transition: 0.2s;
+        }
+        .btn-danger-sm:hover { background: rgba(197,48,48,0.3); }
+        .btn-secondary {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.15);
+            color: #a0aec0;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            transition: 0.2s;
+        }
+        .btn-secondary:hover { background: rgba(255,255,255,0.12); color: #fff; }
+        .btn-save {
+            background: linear-gradient(135deg, #fb5d00, #ff8c00);
+            border: none;
+            padding: 10px 22px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: white;
+            cursor: pointer;
+            font-family: inherit;
+            transition: 0.2s;
+        }
+        .btn-save:hover { opacity: 0.85; }
+        .btn-icon-sm {
+            background: transparent;
+            border: none;
+            color: #a0aec0;
+            cursor: pointer;
+            padding: 4px 6px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            transition: 0.2s;
+        }
+        .btn-icon-sm:hover { color: #fc8181; background: rgba(255,255,255,0.05); }
+        .order-card {
+            background: #23272f;
+            border-radius: 20px;
+            padding: 16px 18px;
+            margin-bottom: 12px;
+            border: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .order-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .order-card-name {
+            font-weight: 700;
+            font-size: 1rem;
+            color: #fff;
+        }
+        .order-card-date {
+            font-size: 0.72rem;
+            color: #718096;
+        }
+        .order-card-plan {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: #fb5d00;
+        }
+        .order-card-desc {
+            font-size: 0.78rem;
+            color: #a0aec0;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 6px;
+            margin-top: 2px;
+        }
+        .order-card-via {
+            font-size: 0.7rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 2px 10px;
+            border-radius: 20px;
+        }
+        .via-wa { background: rgba(37,211,102,0.15); color: #25D366; }
+        .via-ig { background: rgba(221,42,123,0.15); color: #dd2a7b; }
+        .order-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+        }
+        .status-new { background: rgba(251,93,0,0.15); color: #fb5d00; }
+        .status-seen { background: rgba(66,153,225,0.15); color: #63b3ed; }
+        .status-done { background: rgba(72,187,120,0.15); color: #68d391; }
+        .orders-empty {
+            text-align: center;
+            padding: 40px 20px;
+            color: #4a5568;
+            font-size: 0.9rem;
+        }
+        .orders-empty i { font-size: 2.5rem; margin-bottom: 12px; display: block; }
+
+        /* Plan editor */
+        .plan-editor-card {
+            background: #23272f;
+            border-radius: 20px;
+            padding: 18px;
+            margin-bottom: 16px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .plan-editor-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 14px;
+        }
+        .plan-editor-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #fff;
+        }
+        .plan-editor-field {
+            margin-bottom: 10px;
+        }
+        .plan-editor-field label {
+            display: block;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: #718096;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .plan-editor-field input,
+        .plan-editor-field textarea {
+            margin: 0;
+            padding: 10px 14px;
+            font-size: 0.85rem;
+            border-radius: 14px;
+        }
+        .plan-editor-field textarea {
+            border-radius: 14px;
+            min-height: 80px;
+        }
+        .plan-editor-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 12px;
+        }
+        .admin-stats {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        .stat-chip {
+            background: #23272f;
+            border-radius: 16px;
+            padding: 10px 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            min-width: 90px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .stat-chip-val {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #fb5d00;
+        }
+        .stat-chip-label {
+            font-size: 0.7rem;
+            color: #718096;
+        }
 
         @media (min-width: 768px) {
             .container { padding: 0 32px; }
@@ -386,6 +671,7 @@
     <div class="tabs">
         <button class="tab-btn active" data-tab="inicio">🚁 Inicio</button>
         <button class="tab-btn" data-tab="pedidos">📋 Pedidos / Planes</button>
+        <button class="tab-btn" id="adminTabBtn" data-tab="admin">🔒 Admin</button>
     </div>
 
     <!-- PESTAÑA INICIO -->
@@ -396,10 +682,13 @@
                 <p class="hero-description">Grabación inmersiva 4K/60fps. Ideal para interiores/exteriores con máxima seguridad.</p>
             </div>
             <div class="hero-media">
-                <div class="drone-card">
-                    <img class="drone-img" src="imagen.jpg" alt="DJI Avata 2">
-                    <div class="drone-caption"><i class="fas fa-drone" style="color:#fb5d00;"></i> DJI Avata 2 · OcuSync 4.0</div>
-                </div>
+                <a href="https://www.instagram.com/fly_vision.cl?igsh=Nmwya2ViOTN0ajA3" target="_blank" rel="noopener noreferrer" class="drone-card-link" title="Ver perfil en Instagram">
+                    <div class="drone-card">
+                        <img class="drone-img" src="imagen.jpg" alt="DJI Avata 2">
+                        <div class="drone-caption"><i class="fas fa-drone" style="color:#fb5d00;"></i> DJI Avata 2 · OcuSync 4.0</div>
+                        <div class="ig-badge"><i class="fab fa-instagram"></i> @fly_vision.cl · Ver en Instagram</div>
+                    </div>
+                </a>
             </div>
         </div>
         <div class="section-title">Especificaciones técnicas</div>
@@ -424,76 +713,81 @@
             <div class="section-title" style="margin-top: 0;">📸 Catálogo de Servicios</div>
             <p style="color: #a0aec0; font-size: 0.85rem;">Videos y fotografías aéreas con drone · Precios competitivos</p>
         </div>
-        <div class="plans-catalog">
-            <div class="plan-card"><span class="plan-badge badge-basic">🟢 Básico</span><div class="plan-price">$30.000 <span>CLP</span></div><ul class="plan-features"><li><i class="fas fa-check-circle"></i> Video corto con drone</li><li><i class="fas fa-location-dot"></i> 1 ubicación</li><li><i class="fas fa-clock"></i> 10-15 min</li><li><i class="fas fa-chart-line"></i> Redes sociales, casas pequeñas</li></ul></div>
-            <div class="plan-card"><span class="plan-badge badge-standard">🟡 Estándar</span><div class="plan-price">$60.000 <span>CLP</span></div><ul class="plan-features"><li><i class="fas fa-check-circle"></i> Video + tomas variadas</li><li><i class="fas fa-location-dot"></i> 1 ubicación</li><li><i class="fas fa-clock"></i> 20-30 min</li><li><i class="fas fa-chart-line"></i> Casas, parcelas, negocios</li></ul></div>
-            <div class="plan-card"><span class="plan-badge badge-pro">🔵 Pro</span><div class="plan-price">$90.000 <span>CLP</span></div><ul class="plan-features"><li><i class="fas fa-check-circle"></i> Video + edición básica</li><li><i class="fas fa-location-dot"></i> 1 ubicación</li><li><i class="fas fa-clock"></i> Hasta 40 min</li><li><i class="fas fa-chart-line"></i> Inmobiliarias, eventos pequeños</li></ul></div>
-            <div class="plan-card"><span class="plan-badge badge-premium">🔴 Premium</span><div class="plan-price">$120.000 <span>CLP</span></div><ul class="plan-features"><li><i class="fas fa-check-circle"></i> Video + edición + música</li><li><i class="fas fa-location-dot"></i> 1-2 ubicaciones</li><li><i class="fas fa-clock"></i> Hasta 1 hora</li><li><i class="fas fa-chart-line"></i> Publicidad, empresas, eventos</li></ul></div>
+        <div class="plans-catalog" id="plansCatalog">
+            <!-- Rendered by JS -->
         </div>
         <div style="text-align: center; margin: -20px 0 25px;"><p style="color: #a0aec0; font-size: 0.75rem;"><i class="fas fa-tag"></i> Descuentos para varios videos o proyectos grandes</p></div>
-        
+
         <div style="text-align: center; margin-bottom: 50px;">
             <button class="btn-unified" id="openPedidoBtn"><i class="fas fa-clipboard-list"></i> Solicitar cotización ahora</button>
         </div>
     </div>
-    <footer><div>© 2026 fly_vision.cl · Grabación FPV con DJI Avata 2</div><div class="footer-social"><span><i class="fab fa-instagram"></i> @fly_vision.cl</span><span><i class="fab fa-whatsapp"></i> +56 9 3547 6134</span></div></footer>
+
+    <!-- PESTAÑA ADMIN -->
+    <div id="tab-admin" class="tab-content">
+
+        <!-- Login -->
+        <div id="admin-login" class="admin-login">
+            <div class="admin-lock-icon"><i class="fas fa-lock"></i></div>
+            <h2>Panel de Administración</h2>
+            <p>Ingresa la contraseña para acceder</p>
+            <input type="password" id="adminPassword" placeholder="Contraseña" autocomplete="current-password">
+            <button class="btn-unified" id="adminLoginBtn" style="margin-top:4px;"><i class="fas fa-sign-in-alt"></i> Entrar</button>
+            <p id="adminLoginError" class="admin-error"></p>
+        </div>
+
+        <!-- Dashboard -->
+        <div id="admin-dashboard" class="admin-dashboard" style="display:none;">
+
+            <div class="admin-section-header" style="margin-top:10px;">
+                <h3><i class="fas fa-tachometer-alt"></i> Panel FlyVision</h3>
+                <button class="btn-secondary" id="adminLogoutBtn" style="padding:8px 16px;font-size:0.8rem;">Cerrar sesión</button>
+            </div>
+
+            <div class="admin-stats" id="adminStats"></div>
+
+            <!-- Pedidos -->
+            <div class="admin-section-header">
+                <h3><i class="fas fa-clipboard-list"></i> Pedidos recibidos</h3>
+                <button class="btn-danger-sm" id="clearOrdersBtn">Limpiar historial</button>
+            </div>
+            <div id="ordersList"></div>
+
+            <!-- Editor de planes -->
+            <div class="admin-section-header">
+                <h3><i class="fas fa-sliders-h"></i> Editar planes y precios</h3>
+            </div>
+            <div id="plansEditor"></div>
+
+        </div>
+    </div>
+
+    <footer>
+        <div>© 2026 fly_vision.cl · Grabación FPV con DJI Avata 2</div>
+        <div class="footer-social">
+            <span><i class="fab fa-instagram"></i> @fly_vision.cl</span>
+            <span><i class="fab fa-whatsapp"></i> +56 9 3547 6134</span>
+        </div>
+        <div class="footer-secret" id="footerSecret" title="">·</div>
+    </footer>
 </div>
 
-<!-- MODAL -->
+<!-- MODAL PEDIDO -->
 <div id="pedidoModal" class="modal">
     <div class="modal-content">
         <span class="close-modal" id="closeModalBtn">&times;</span>
         <h3><i class="fas fa-drone" style="color:#fb5d00;"></i> Solicitar pedido</h3>
         <div class="sub-modal">Cuéntanos qué plan necesitas</div>
-        
+
         <form id="pedidoForm">
             <input type="text" placeholder="Tu nombre *" required id="nombreCliente">
-            
+
             <label style="font-size: 0.85rem; font-weight: 500; margin: 8px 0 4px; display: block;">Selecciona tu plan:</label>
             <div class="planes-selector" id="planesSelector">
-                <div class="plan-option" data-plan-nombre="Plan Básico" data-plan-detalle="$30.000 (Video corto, 1 ubicación, 10-15 min)">
-                    <div class="plan-info">
-                        <span class="plan-name">🟢 Plan Básico</span>
-                        <span class="plan-price-small">$30.000 CLP</span>
-                        <span class="plan-detail">Video corto · 1 ubicación · 10-15 min</span>
-                    </div>
-                    <div class="radio-custom"></div>
-                </div>
-                <div class="plan-option" data-plan-nombre="Plan Estándar" data-plan-detalle="$60.000 (Video + tomas variadas, 20-30 min)">
-                    <div class="plan-info">
-                        <span class="plan-name">🟡 Plan Estándar</span>
-                        <span class="plan-price-small">$60.000 CLP</span>
-                        <span class="plan-detail">Video + tomas variadas · 20-30 min</span>
-                    </div>
-                    <div class="radio-custom"></div>
-                </div>
-                <div class="plan-option" data-plan-nombre="Plan Pro" data-plan-detalle="$90.000 (Video + edición básica, hasta 40 min)">
-                    <div class="plan-info">
-                        <span class="plan-name">🔵 Plan Pro</span>
-                        <span class="plan-price-small">$90.000 CLP</span>
-                        <span class="plan-detail">Edición básica · hasta 40 min</span>
-                    </div>
-                    <div class="radio-custom"></div>
-                </div>
-                <div class="plan-option" data-plan-nombre="Plan Premium" data-plan-detalle="$120.000 (Video + edición + música, 1-2 ubicaciones, hasta 1 hora)">
-                    <div class="plan-info">
-                        <span class="plan-name">🔴 Plan Premium</span>
-                        <span class="plan-price-small">$120.000 CLP</span>
-                        <span class="plan-detail">Edición + música · 1-2 ubicaciones · 1h</span>
-                    </div>
-                    <div class="radio-custom"></div>
-                </div>
-                <div class="plan-option" data-plan-nombre="Proyecto a medida" data-plan-detalle="Cotización personalizada (varias ubicaciones, duración especial)">
-                    <div class="plan-info">
-                        <span class="plan-name">✨ Proyecto a medida</span>
-                        <span class="plan-price-small">Cotizar</span>
-                        <span class="plan-detail">Varias ubicaciones o necesidades especiales</span>
-                    </div>
-                    <div class="radio-custom"></div>
-                </div>
+                <!-- Rendered by JS -->
             </div>
             <textarea id="descripcionPedido" rows="3" placeholder="Describe tu proyecto: ubicación, fecha deseada, detalles extra..."></textarea>
-            
+
             <div class="modal-buttons">
                 <button type="button" id="enviarWhatsAppBtn" class="btn-wa"><i class="fab fa-whatsapp fa-lg"></i> Enviar por WhatsApp</button>
                 <button type="button" id="enviarIGBtn" class="btn-ig"><i class="fab fa-instagram fa-lg"></i> Enviar por Instagram DM</button>
@@ -504,39 +798,170 @@
 </div>
 
 <script>
-    // TABS
-    const tabBtns = document.querySelectorAll('.tab-btn');
-    const tabContents = document.querySelectorAll('.tab-content');
-    tabBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const tabId = btn.getAttribute('data-tab');
-            tabBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            tabContents.forEach(content => content.classList.remove('active-tab'));
-            document.getElementById(`tab-${tabId}`).classList.add('active-tab');
-        });
-    });
-
-    // MODAL
-    const modal = document.getElementById('pedidoModal');
-    const openBtn = document.getElementById('openPedidoBtn');
-    const closeModalSpan = document.getElementById('closeModalBtn');
-    function openModal() { modal.style.display = 'flex'; }
-    function closeModal() { modal.style.display = 'none'; document.getElementById('pedidoForm').reset(); clearPlanSelection(); }
-    if(openBtn) openBtn.addEventListener('click', openModal);
-    if(closeModalSpan) closeModalSpan.addEventListener('click', closeModal);
-    window.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
-
-    // Lógica de selección de planes
-    let selectedPlanNombre = null;
-    let selectedPlanDetalle = null;
-    const planOptions = document.querySelectorAll('.plan-option');
-    function clearPlanSelection() {
-        planOptions.forEach(opt => opt.classList.remove('selected'));
-        selectedPlanNombre = null;
-        selectedPlanDetalle = null;
+// ===================== DATOS DE PLANES (con defaults) =====================
+const DEFAULT_PLANS = [
+    {
+        id: 'basico',
+        nombre: 'Plan Básico',
+        emoji: '🟢',
+        badge: 'badge-basic',
+        precio: '30.000',
+        features: ['Video corto con drone', '1 ubicación', '10-15 min', 'Redes sociales, casas pequeñas'],
+        icons: ['fa-check-circle', 'fa-location-dot', 'fa-clock', 'fa-chart-line']
+    },
+    {
+        id: 'estandar',
+        nombre: 'Plan Estándar',
+        emoji: '🟡',
+        badge: 'badge-standard',
+        precio: '60.000',
+        features: ['Video + tomas variadas', '1 ubicación', '20-30 min', 'Casas, parcelas, negocios'],
+        icons: ['fa-check-circle', 'fa-location-dot', 'fa-clock', 'fa-chart-line']
+    },
+    {
+        id: 'pro',
+        nombre: 'Plan Pro',
+        emoji: '🔵',
+        badge: 'badge-pro',
+        precio: '90.000',
+        features: ['Video + edición básica', '1 ubicación', 'Hasta 40 min', 'Inmobiliarias, eventos pequeños'],
+        icons: ['fa-check-circle', 'fa-location-dot', 'fa-clock', 'fa-chart-line']
+    },
+    {
+        id: 'premium',
+        nombre: 'Plan Premium',
+        emoji: '🔴',
+        badge: 'badge-premium',
+        precio: '120.000',
+        features: ['Video + edición + música', '1-2 ubicaciones', 'Hasta 1 hora', 'Publicidad, empresas, eventos'],
+        icons: ['fa-check-circle', 'fa-location-dot', 'fa-clock', 'fa-chart-line']
     }
-    planOptions.forEach(opt => {
+];
+
+function getPlans() {
+    try {
+        const stored = localStorage.getItem('fv_plans');
+        return stored ? JSON.parse(stored) : DEFAULT_PLANS;
+    } catch(e) { return DEFAULT_PLANS; }
+}
+function savePlans(plans) {
+    localStorage.setItem('fv_plans', JSON.stringify(plans));
+}
+function getOrders() {
+    try {
+        const stored = localStorage.getItem('fv_orders');
+        return stored ? JSON.parse(stored) : [];
+    } catch(e) { return []; }
+}
+function saveOrder(order) {
+    const orders = getOrders();
+    orders.unshift(order);
+    localStorage.setItem('fv_orders', JSON.stringify(orders));
+}
+function updateOrders(orders) {
+    localStorage.setItem('fv_orders', JSON.stringify(orders));
+}
+
+function formatDate(ts) {
+    const d = new Date(ts);
+    return d.toLocaleDateString('es-CL', { day:'2-digit', month:'2-digit', year:'numeric' })
+        + ' ' + d.toLocaleTimeString('es-CL', { hour:'2-digit', minute:'2-digit' });
+}
+
+// ===================== RENDER PLANS (catalog + modal) =====================
+function renderCatalog() {
+    const plans = getPlans();
+    const catalog = document.getElementById('plansCatalog');
+    catalog.innerHTML = plans.map(p => `
+        <div class="plan-card">
+            <span class="plan-badge ${p.badge}">${p.emoji} ${p.nombre.replace(/Plan /,'')}</span>
+            <div class="plan-price">$${p.precio} <span>CLP</span></div>
+            <ul class="plan-features">
+                ${p.features.map((f, i) => `<li><i class="fas ${p.icons[i] || 'fa-check-circle'}"></i> ${f}</li>`).join('')}
+            </ul>
+        </div>
+    `).join('') + `
+        <div class="plan-card">
+            <span class="plan-badge" style="background:#4a5568;">✨ A medida</span>
+            <div class="plan-price" style="font-size:1.2rem;">Cotizar</div>
+            <ul class="plan-features">
+                <li><i class="fas fa-check-circle"></i> Varias ubicaciones</li>
+                <li><i class="fas fa-check-circle"></i> Necesidades especiales</li>
+                <li><i class="fas fa-check-circle"></i> Presupuesto personalizado</li>
+            </ul>
+        </div>
+    `;
+}
+
+function renderModalPlans() {
+    const plans = getPlans();
+    const selector = document.getElementById('planesSelector');
+    selector.innerHTML = plans.map(p => `
+        <div class="plan-option"
+             data-plan-nombre="${p.nombre}"
+             data-plan-detalle="$${p.precio} (${p.features[0]}, ${p.features[1] || ''}, ${p.features[2] || ''})">
+            <div class="plan-info">
+                <span class="plan-name">${p.emoji} ${p.nombre}</span>
+                <span class="plan-price-small">$${p.precio} CLP</span>
+                <span class="plan-detail">${p.features.slice(0,3).join(' · ')}</span>
+            </div>
+            <div class="radio-custom"></div>
+        </div>
+    `).join('') + `
+        <div class="plan-option"
+             data-plan-nombre="Proyecto a medida"
+             data-plan-detalle="Cotización personalizada (varias ubicaciones, duración especial)">
+            <div class="plan-info">
+                <span class="plan-name">✨ Proyecto a medida</span>
+                <span class="plan-price-small">Cotizar</span>
+                <span class="plan-detail">Varias ubicaciones o necesidades especiales</span>
+            </div>
+            <div class="radio-custom"></div>
+        </div>
+    `;
+    // Re-bind plan option events
+    bindPlanOptions();
+}
+
+// ===================== TABS =====================
+const tabBtns = document.querySelectorAll('.tab-btn');
+const tabContents = document.querySelectorAll('.tab-content');
+tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const tabId = btn.getAttribute('data-tab');
+        tabBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        tabContents.forEach(content => content.classList.remove('active-tab'));
+        document.getElementById(`tab-${tabId}`).classList.add('active-tab');
+    });
+});
+
+// ===================== MODAL =====================
+const modal = document.getElementById('pedidoModal');
+const openBtn = document.getElementById('openPedidoBtn');
+const closeModalSpan = document.getElementById('closeModalBtn');
+function openModal() { modal.style.display = 'flex'; }
+function closeModal() {
+    modal.style.display = 'none';
+    document.getElementById('pedidoForm').reset();
+    clearPlanSelection();
+}
+if(openBtn) openBtn.addEventListener('click', openModal);
+if(closeModalSpan) closeModalSpan.addEventListener('click', closeModal);
+window.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
+
+// ===================== PLAN SELECTION =====================
+let selectedPlanNombre = null;
+let selectedPlanDetalle = null;
+
+function clearPlanSelection() {
+    document.querySelectorAll('.plan-option').forEach(opt => opt.classList.remove('selected'));
+    selectedPlanNombre = null;
+    selectedPlanDetalle = null;
+}
+
+function bindPlanOptions() {
+    document.querySelectorAll('.plan-option').forEach(opt => {
         opt.addEventListener('click', () => {
             clearPlanSelection();
             opt.classList.add('selected');
@@ -544,65 +969,236 @@
             selectedPlanDetalle = opt.getAttribute('data-plan-detalle');
         });
     });
+}
 
-    // MENSAJE PARA WHATSAPP - Formato compacto (un solo salto de línea entre párrafos)
+// ===================== MENSAJES =====================
 function generarMensajeWhatsApp() {
     const nombre = document.getElementById('nombreCliente')?.value.trim();
-    if(!nombre) {
-        alert("⚠️ Por favor ingresa tu nombre.");
-        return null;
-    }
-    if(!selectedPlanNombre) {
-        alert("⚠️ Por favor selecciona un plan de la lista.");
-        return null;
-    }
+    if(!nombre) { alert("⚠️ Por favor ingresa tu nombre."); return null; }
+    if(!selectedPlanNombre) { alert("⚠️ Por favor selecciona un plan de la lista."); return null; }
     const descripcion = document.getElementById('descripcionPedido')?.value.trim() || "Sin detalles adicionales";
-    
-    // UN SOLO salto de línea entre cada parte (sin línea vacía extra)
-    const mensaje = `Hola, soy ${nombre}. Me interesa el servicio de grabación FlyVision con DJI Avata 2.\nPlan seleccionado: ${selectedPlanNombre} - ${selectedPlanDetalle}\nDetalles del proyecto: ${descripcion}\nEspero su respuesta. ¡Gracias!`;
-    return encodeURIComponent(mensaje);
+    const msg = `Hola, soy ${nombre}. Me interesa el servicio de grabación FlyVision con DJI Avata 2.\nPlan seleccionado: ${selectedPlanNombre} - ${selectedPlanDetalle}\nDetalles del proyecto: ${descripcion}\nEspero su respuesta. ¡Gracias!`;
+    return encodeURIComponent(msg);
 }
 
-// MENSAJE PARA INSTAGRAM - Mismo formato compacto
-function generarMensajeInstagram() {
+function getOrderData(via) {
     const nombre = document.getElementById('nombreCliente')?.value.trim();
-    if(!nombre) return null;
-    if(!selectedPlanNombre) return null;
-    const descripcion = document.getElementById('descripcionPedido')?.value.trim() || "Sin detalles adicionales";
-    
-    // UN SOLO salto de línea entre cada parte
-    const mensaje = `Hola, soy ${nombre}. Me interesa el servicio de grabación FlyVision con DJI Avata 2.\nPlan seleccionado: ${selectedPlanNombre} - ${selectedPlanDetalle}\nDetalles del proyecto: ${descripcion}\nEspero su respuesta. ¡Gracias!`;
-    return mensaje;
+    const descripcion = document.getElementById('descripcionPedido')?.value.trim() || '';
+    return { id: Date.now(), fecha: Date.now(), nombre, plan: selectedPlanNombre, detalle: selectedPlanDetalle, descripcion, via, status: 'new' };
 }
 
-    // WhatsApp
-    document.getElementById('enviarWhatsAppBtn')?.addEventListener('click', () => {
-        const mensajeCodificado = generarMensajeWhatsApp();
-        if(!mensajeCodificado) return;
-        const url = `https://wa.me/56935476134?text=${mensajeCodificado}`;
-        window.open(url, '_blank');
-        closeModal();
-    });
+// WhatsApp
+document.getElementById('enviarWhatsAppBtn')?.addEventListener('click', () => {
+    const mensajeCodificado = generarMensajeWhatsApp();
+    if(!mensajeCodificado) return;
+    saveOrder(getOrderData('WhatsApp'));
+    window.open(`https://wa.me/56935476134?text=${mensajeCodificado}`, '_blank');
+    closeModal();
+});
 
-    // Instagram - Versión mejorada con mensaje claro
+// Instagram
 document.getElementById('enviarIGBtn')?.addEventListener('click', async () => {
     const nombre = document.getElementById('nombreCliente')?.value.trim();
     if(!nombre) { alert("⚠️ Por favor ingresa tu nombre."); return; }
     if(!selectedPlanNombre) { alert("⚠️ Por favor selecciona un plan de la lista."); return; }
-    
     const descripcion = document.getElementById('descripcionPedido')?.value.trim() || "Sin detalles adicionales";
     const mensajeTexto = `Hola, soy ${nombre}. Me interesa el servicio de grabación FlyVision con DJI Avata 2.\nPlan seleccionado: ${selectedPlanNombre} - ${selectedPlanDetalle}\nDetalles del proyecto: ${descripcion}\nEspero su respuesta. ¡Gracias!`;
-    
+    saveOrder(getOrderData('Instagram'));
     try {
         await navigator.clipboard.writeText(mensajeTexto);
         alert("✅ Mensaje copiado al portapapeles.\n\n📱 A continuación serás redirigido a Instagram.\n✏️ Solo debes pegar el mensaje y enviarlo.");
         window.open('https://ig.me/m/fly_vision.cl', '_blank');
-    } catch (err) {
+    } catch(err) {
         alert("No se pudo copiar el mensaje automáticamente. Serás redirigido a Instagram.");
         window.open('https://ig.me/m/fly_vision.cl', '_blank');
     }
     closeModal();
 });
+
+// ===================== ADMIN - ACCESO SECRETO =====================
+// Hacer 5 clics en el punto del footer para mostrar el botón Admin
+let secretClicks = 0;
+let secretTimer = null;
+document.getElementById('footerSecret').addEventListener('click', () => {
+    secretClicks++;
+    clearTimeout(secretTimer);
+    secretTimer = setTimeout(() => { secretClicks = 0; }, 3000);
+    if(secretClicks >= 5) {
+        secretClicks = 0;
+        const adminBtn = document.getElementById('adminTabBtn');
+        adminBtn.style.display = adminBtn.style.display === 'none' || adminBtn.style.display === '' ? 'inline-block' : 'none';
+    }
+});
+
+// ===================== ADMIN - LOGIN =====================
+const ADMIN_PASS = 'fly2026';
+
+document.getElementById('adminLoginBtn').addEventListener('click', doAdminLogin);
+document.getElementById('adminPassword').addEventListener('keydown', (e) => {
+    if(e.key === 'Enter') doAdminLogin();
+});
+
+function doAdminLogin() {
+    const pass = document.getElementById('adminPassword').value;
+    const errEl = document.getElementById('adminLoginError');
+    if(pass === ADMIN_PASS) {
+        errEl.textContent = '';
+        document.getElementById('admin-login').style.display = 'none';
+        document.getElementById('admin-dashboard').style.display = 'block';
+        renderAdminDashboard();
+    } else {
+        errEl.textContent = '❌ Contraseña incorrecta';
+        document.getElementById('adminPassword').value = '';
+    }
+}
+
+document.getElementById('adminLogoutBtn').addEventListener('click', () => {
+    document.getElementById('admin-login').style.display = 'block';
+    document.getElementById('admin-dashboard').style.display = 'none';
+    document.getElementById('adminPassword').value = '';
+    // Volver a inicio
+    tabBtns.forEach(b => b.classList.remove('active'));
+    tabContents.forEach(c => c.classList.remove('active-tab'));
+    document.querySelector('[data-tab="inicio"]').classList.add('active');
+    document.getElementById('tab-inicio').classList.add('active-tab');
+});
+
+// ===================== ADMIN - DASHBOARD =====================
+function renderAdminDashboard() {
+    renderAdminStats();
+    renderOrdersList();
+    renderPlansEditor();
+}
+
+function renderAdminStats() {
+    const orders = getOrders();
+    const newCount = orders.filter(o => o.status === 'new').length;
+    const doneCount = orders.filter(o => o.status === 'done').length;
+    document.getElementById('adminStats').innerHTML = `
+        <div class="stat-chip">
+            <span class="stat-chip-val">${orders.length}</span>
+            <span class="stat-chip-label">Total pedidos</span>
+        </div>
+        <div class="stat-chip">
+            <span class="stat-chip-val" style="color:#fb5d00;">${newCount}</span>
+            <span class="stat-chip-label">Sin revisar</span>
+        </div>
+        <div class="stat-chip">
+            <span class="stat-chip-val" style="color:#68d391;">${doneCount}</span>
+            <span class="stat-chip-label">Completados</span>
+        </div>
+    `;
+}
+
+function renderOrdersList() {
+    const orders = getOrders();
+    const el = document.getElementById('ordersList');
+    if(orders.length === 0) {
+        el.innerHTML = `<div class="orders-empty"><i class="fas fa-inbox"></i>Aún no hay pedidos registrados.<br>Aparecerán aquí cuando los clientes usen el formulario.</div>`;
+        return;
+    }
+    el.innerHTML = orders.map((o, idx) => {
+        const statusLabels = { new: 'Nuevo', seen: 'Revisado', done: 'Completado' };
+        const statusClass = { new: 'status-new', seen: 'status-seen', done: 'status-done' };
+        const viaClass = o.via === 'WhatsApp' ? 'via-wa' : 'via-ig';
+        const viaIcon = o.via === 'WhatsApp' ? 'fa-whatsapp fab' : 'fa-instagram fab';
+        return `
+        <div class="order-card" id="order-${o.id}">
+            <div class="order-card-header">
+                <span class="order-card-name">${o.nombre || 'Sin nombre'}</span>
+                <span class="order-card-date">${formatDate(o.fecha)}</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+                <span class="order-card-plan"><i class="fas fa-tag"></i> ${o.plan || '—'}</span>
+                <span class="order-card-via ${viaClass}"><i class="${viaIcon}"></i> ${o.via}</span>
+                <button class="order-status ${statusClass[o.status]}" onclick="cycleOrderStatus(${idx})" title="Clic para cambiar estado">
+                    ${statusLabels[o.status]}
+                </button>
+                <button class="btn-icon-sm" onclick="deleteOrder(${idx})" title="Eliminar pedido"><i class="fas fa-trash-alt"></i></button>
+            </div>
+            ${o.descripcion ? `<div class="order-card-desc"><i class="fas fa-comment-alt" style="margin-right:4px;opacity:0.5;"></i>${o.descripcion}</div>` : ''}
+            ${o.detalle ? `<div style="font-size:0.72rem;color:#4a5568;margin-top:2px;">${o.detalle}</div>` : ''}
+        </div>`;
+    }).join('');
+}
+
+function cycleOrderStatus(idx) {
+    const orders = getOrders();
+    const cycle = { new: 'seen', seen: 'done', done: 'new' };
+    orders[idx].status = cycle[orders[idx].status] || 'new';
+    updateOrders(orders);
+    renderOrdersList();
+    renderAdminStats();
+}
+
+function deleteOrder(idx) {
+    if(!confirm('¿Eliminar este pedido?')) return;
+    const orders = getOrders();
+    orders.splice(idx, 1);
+    updateOrders(orders);
+    renderOrdersList();
+    renderAdminStats();
+}
+
+document.getElementById('clearOrdersBtn').addEventListener('click', () => {
+    if(!confirm('¿Eliminar todos los pedidos? Esta acción no se puede deshacer.')) return;
+    localStorage.removeItem('fv_orders');
+    renderOrdersList();
+    renderAdminStats();
+});
+
+// ===================== ADMIN - EDITOR DE PLANES =====================
+function renderPlansEditor() {
+    const plans = getPlans();
+    const el = document.getElementById('plansEditor');
+    el.innerHTML = plans.map((p, idx) => `
+        <div class="plan-editor-card">
+            <div class="plan-editor-header">
+                <span class="plan-editor-title">${p.emoji} ${p.nombre}</span>
+                <span class="plan-badge ${p.badge}" style="font-size:0.65rem;">${p.badge.replace('badge-','')}</span>
+            </div>
+            <div class="plan-editor-field">
+                <label>Precio (sin puntos, solo número)</label>
+                <input type="text" id="plan-precio-${idx}" value="${p.precio}" placeholder="ej: 30.000">
+            </div>
+            <div class="plan-editor-field">
+                <label>Características (una por línea)</label>
+                <textarea id="plan-features-${idx}" rows="4">${p.features.join('\n')}</textarea>
+            </div>
+            <div class="plan-editor-actions">
+                <button class="btn-save" onclick="savePlanEdit(${idx})"><i class="fas fa-save"></i> Guardar cambios</button>
+            </div>
+        </div>
+    `).join('');
+}
+
+function savePlanEdit(idx) {
+    const plans = getPlans();
+    const precioEl = document.getElementById(`plan-precio-${idx}`);
+    const featuresEl = document.getElementById(`plan-features-${idx}`);
+    if(!precioEl || !featuresEl) return;
+
+    const newPrecio = precioEl.value.trim();
+    const newFeatures = featuresEl.value.split('\n').map(f => f.trim()).filter(f => f.length > 0);
+
+    if(!newPrecio) { alert('El precio no puede estar vacío.'); return; }
+    if(newFeatures.length === 0) { alert('Agrega al menos una característica.'); return; }
+
+    plans[idx].precio = newPrecio;
+    plans[idx].features = newFeatures;
+    // Asegurar que icons tenga la misma cantidad de elementos
+    while(plans[idx].icons.length < newFeatures.length) plans[idx].icons.push('fa-check-circle');
+    plans[idx].icons = plans[idx].icons.slice(0, newFeatures.length);
+
+    savePlans(plans);
+    renderCatalog();
+    renderModalPlans();
+    alert(`✅ ${plans[idx].nombre} actualizado correctamente.`);
+}
+
+// ===================== INIT =====================
+renderCatalog();
+renderModalPlans();
 </script>
 </body>
 </html>
